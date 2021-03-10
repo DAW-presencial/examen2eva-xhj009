@@ -80,9 +80,9 @@
             <div class="mb-3 col-2">
                 <label for="titularidad" class="form-label">@lang('titularidad')</label>
                 <select class="form-select" name='titularidad' required id="documento">
-                    <option value="dni" @if (old('titularidad') === 'publica') selected @endif>DNI</option>
-                    <option value="nie" @if (old('titularidad') === 'concertado') selected @endif>NIE</option>
-                    <option value="pasaporte" @if (old('titularidad') === 'privado') selected @endif>Pasaporte</option>
+                    <option value="publica" @if (old('titularidad') === 'publica') selected @endif>publica</option>
+                    <option value="concertado" @if (old('titularidad') === 'concertado') selected @endif>concertado</option>
+                    <option value="privado" @if (old('titularidad') === 'privado') selected @endif>privado</option>
                 </select>
             </div>
 
