@@ -7,7 +7,7 @@
 @endif
 
 </br>   
-<a href="{{url('create')}}" class="btn btn-primary">Agregar CenDocente</a>
+<a href="{{url('/create')}}" class="btn btn-primary">Agregar CenDocente</a>
 
 <table class="table table-light table-hover">
     <thead class="thead-light">

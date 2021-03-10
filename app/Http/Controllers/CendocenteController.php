@@ -96,7 +96,6 @@ class CendocenteController extends Controller
         $this->validate($request,$campos,$mensaje);
 
         $cendocente = cendocente::findOrFail($id);
-        //return view('c.edit',compact('tutor'));
         return view('cendocentes.edit',compact('cendocente'));
 
     }

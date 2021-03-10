@@ -14,7 +14,7 @@
  @csrf
   <!-- cendocente -->
    <fieldset class="border p-2">
-        <legend></legend>
+       
 
         <!-- denominacion -->
         <div class="row align-items-start">
