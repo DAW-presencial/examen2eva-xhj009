@@ -16,7 +16,7 @@ class CendocenteController extends Controller
     {   
         //
         $datos['cendocente']=cendocente::paginate();
-        return view('cendocentes.index',compact($datos));
+        return view('cendocentes.index',$datos);
     }
 
     /**
@@ -57,7 +57,7 @@ class CendocenteController extends Controller
 
         $datoscenDocentes = request()->except('_token');
         cendocente::insert($datoscenDocentes);
-        return redirect('cendocente')->with('Mensaje','CenDocente agregado con exito');
+        return redirect('/')->with('Mensaje','CenDocente agregado con exito');
     }
 
     /**
