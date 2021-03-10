@@ -13,8 +13,10 @@ class CendocenteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         //
+        $datos['cendocente']=cendocente::paginate();
+        return view('cendocentes.index',compact($datos));
     }
 
     /**
@@ -25,6 +27,7 @@ class CendocenteController extends Controller
     public function create()
     {
         //
+        return view('cendocentes.create');
     }
 
     /**
@@ -35,7 +38,26 @@ class CendocenteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validar campos
+       $campos=[
+        'denominacion' => 'required  | String | max:50',
+        'cif'=> 'required  | String | max:20',
+        'dir_postal'  => 'required  | String | max:100',
+        'cp ' => 'required  | Char | max:5',
+        'director_nom'  => 'required  | String | max:20',
+        'pais_documento' => 'required  | String | max:100',
+        'director_apellido1'  => 'required  | String | max:20',
+        'director_apellido2'  => 'required  | String | max:20',
+        'documento' => 'required',
+        'titularidad' => 'required'
+    ];
+        $mensaje=["required" => 'El :attribute es requerido'];
+        $this->validate($request,$campos,$mensaje);
+
+
+        $datoscenDocentes = request()->except('_token');
+        cendocente::insert($datoscenDocentes);
+        return redirect('cendocente')->with('Mensaje','CenDocente agregado con exito');
     }
 
     /**
@@ -55,9 +77,28 @@ class CendocenteController extends Controller
      * @param  \App\Models\cendocente  $cendocente
      * @return \Illuminate\Http\Response
      */
-    public function edit(cendocente $cendocente)
+    public function edit(Request $request,$id)
     {
-        //
+        //Validar campos
+       $campos=[
+        'denominacion' => 'required  | String | max:50',
+        'cif'=> 'required  | String | max:20',
+        'dir_postal'  => 'required  | String | max:100',
+        'cp ' => 'required  | Char | max:5',
+        'director_nom'  => 'required  | String | max:20',
+        'pais_documento' => 'required  | String | max:100',
+        'director_apellido1'  => 'required  | String | max:20',
+        'director_apellido2'  => 'required  | String | max:20',
+        'documento' => 'required',
+        'titularidad' => 'required'
+    ];
+        $mensaje=["required" => 'El :attribute es requerido'];
+        $this->validate($request,$campos,$mensaje);
+
+        $cendocente = cendocente::findOrFail($id);
+        //return view('c.edit',compact('tutor'));
+        return view('cendocentes.edit',compact('cendocente'));
+
     }
 
     /**
@@ -67,9 +108,13 @@ class CendocenteController extends Controller
      * @param  \App\Models\cendocente  $cendocente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, cendocente $cendocente)
+    public function update(Request $request, $id)
     {
         //
+        $datoscenDocente = request()->except(['_token','_method']);
+        cendocente::where('id','=',$id) -> update($datoscenDocente);
+        return redirect('/')->with('Mensaje','Cendocente modificado exitosamente');
+
     }
 
     /**
@@ -78,8 +123,10 @@ class CendocenteController extends Controller
      * @param  \App\Models\cendocente  $cendocente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(cendocente $cendocente)
+    public function destroy($id)
     {
         //
+        cendocente::destroy($id);
+        return redirect('/')->with('Mensaje','CenDocente eliminado exitosamente');
     }
 }
